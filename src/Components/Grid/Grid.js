@@ -8,17 +8,10 @@ import Restaurant from "../../Containers/Restaurant/Restaurant";
 import Dinner from "../UI/Dinner/Dinner";
 import Lunch from "../UI/Lunch/Lunch";
 import Slider from "../UI/ImageSlider/Slider";
-import {
-    Routes,
-    Route,
-    useParams,
-    useLocation,
-    useNavigate
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 const Grid = (props) => {
     console.log("props", props);
-
     return (
         <div className={classes.pageContent}>
             <div className={classes.grid}>

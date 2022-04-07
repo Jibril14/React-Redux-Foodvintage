@@ -5,7 +5,7 @@ import Toolbar from "../Toolbar/Toolbar";
 import Footer from "../Toolbar/Footer/Footer";
 import SideDrawer from "../UI/SideDrawer/SideDrawer";
 import Banner from "../UI/Banner/Banner";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 class Layout extends Component {
     state = {
