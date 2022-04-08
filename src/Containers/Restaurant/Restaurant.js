@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Auxi from "../../Hoc/Auxi";
 import Meal from "../../Components/Meal/Meal";
 import FoodControl from "../../Components/Meal/FoodControl/FoodControl";
@@ -6,6 +7,7 @@ import Modal from "../../Components/UI/Modal/Modal";
 import OrderSummary from "../../Components/Meal/OrderSummary/OrderSummary";
 import Spinner from "../../Components/UI/Spinner/Spinner";
 import axios from "axios";
+import * as actionTypes from "../../store/actions";
 
 const FOOD_PRICES = {
     rice: 0.5,
@@ -15,12 +17,6 @@ const FOOD_PRICES = {
 
 class Restaurant extends Component {
     state = {
-        foods: {
-            rice: 0,
-            chicken: 0,
-            carrot: 0
-        },
-        //foods: null,
         totalPrice: 0,
         purchasable: false,
         orderNow: false,
@@ -32,6 +28,7 @@ class Restaurant extends Component {
         axios.get("/foods.json").then((response) => {
             this.setState({ foods: response.data });
         });
+        console.log("this.props.foo", this.props.foo);
     }
 
     updatePurchasable = (foods) => {
@@ -103,7 +100,7 @@ class Restaurant extends Component {
 
     render() {
         const disabledLessBtn = {
-            ...this.state.foods
+            ...this.props.foo
         };
 
         for (let key in disabledLessBtn) {
@@ -111,7 +108,7 @@ class Restaurant extends Component {
         }
 
         const disabledMoreBtn = {
-            ...this.state.foods
+            ...this.props.foo
         };
 
         for (let key in disabledMoreBtn) {
@@ -127,16 +124,16 @@ class Restaurant extends Component {
         let foods = <Spinner />;
         let orderSummary = null;
 
-        if (this.state.foods) {
+        if (this.props.foo) {
             foods = (
                 <Auxi>
                     <Meal
-                        foodMenu={this.state.foods}
+                        foodMenu={this.props.foo}
                         warning={disabledMoreBtn["rice"] === true}
                     />
                     <FoodControl
-                        foodAdded={this.addFoodHandler}
-                        foodRemoved={this.removeFoodHandler}
+                        foodAdded={this.props.onAddFood}
+                        foodRemoved={this.props.onRemoveFood}
                         disableLess={disabledLessBtn}
                         disableMore={disabledMoreBtn}
                         price={this.state.totalPrice}
@@ -148,7 +145,7 @@ class Restaurant extends Component {
 
             orderSummary = (
                 <OrderSummary
-                    foodOrder={this.state.foods}
+                    foodOrder={this.props.foo}
                     orderContinueing={this.orderNowContinueHandler}
                     orderCancelling={this.orderNowCancelHandler}
                     price={this.state.totalPrice}
@@ -174,4 +171,19 @@ class Restaurant extends Component {
     }
 }
 
-export default Restaurant;
+const mapStateToProps = (state) => {
+    return {
+        foo: state.foodReducer.foods
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAddFood: (fName) =>
+            dispatch({ type: actionTypes.ADD_FOOD, foodName: fName }),
+
+        onRemoveFood: (fName) =>
+            dispatch({ type: actionTypes.REMOVE_FOOD, foodName: fName })
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Restaurant);
