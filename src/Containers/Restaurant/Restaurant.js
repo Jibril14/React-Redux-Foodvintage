@@ -11,7 +11,6 @@ import * as actionTypes from "../../store/actions";
 
 class Restaurant extends Component {
     state = {
-        purchasable: false,
         orderNow: false,
         loading: false,
         error: null
@@ -33,7 +32,7 @@ class Restaurant extends Component {
                 return tot + val;
             });
 
-        this.setState({ purchasable: sum > 0 });
+        return sum > 0;
     };
 
     orderNowHandler = () => {
@@ -102,7 +101,7 @@ class Restaurant extends Component {
                         disableLess={disabledLessBtn}
                         disableMore={disabledMoreBtn}
                         price={this.props.totalPrice}
-                        purchasable={this.state.purchasable}
+                        purchasable={this.updatePurchasable(this.props.foo)}
                         ordered={this.orderNowHandler}
                     />
                 </Auxi>
