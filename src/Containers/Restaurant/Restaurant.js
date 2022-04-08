@@ -9,15 +9,8 @@ import Spinner from "../../Components/UI/Spinner/Spinner";
 import axios from "axios";
 import * as actionTypes from "../../store/actions";
 
-const FOOD_PRICES = {
-    rice: 0.5,
-    chicken: 0.4,
-    carrot: 0.1
-};
-
 class Restaurant extends Component {
     state = {
-        totalPrice: 0,
         purchasable: false,
         orderNow: false,
         loading: false,
@@ -43,34 +36,6 @@ class Restaurant extends Component {
         this.setState({ purchasable: sum > 0 });
     };
 
-    addFoodHandler = (type) => {
-        const oldCount = this.state.foods[type];
-        const updatedCount = oldCount + 1;
-        const updatedFood = {
-            ...this.state.foods
-        };
-        updatedFood[type] = updatedCount;
-        const priceAddition = FOOD_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice + priceAddition;
-        this.setState({ totalPrice: newPrice, foods: updatedFood });
-        this.updatePurchasable(updatedFood);
-    };
-
-    removeFoodHandler = (type) => {
-        const oldCount = this.state.foods[type];
-        const updatedCount = oldCount - 1;
-        const updatedFood = {
-            ...this.state.foods
-        };
-        updatedFood[type] = updatedCount;
-        const priceAddition = FOOD_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice - priceAddition;
-        this.setState({ totalPrice: newPrice, foods: updatedFood });
-        this.updatePurchasable(updatedFood);
-    };
-
     orderNowHandler = () => {
         this.setState({ orderNow: true });
     };
@@ -89,7 +54,7 @@ class Restaurant extends Component {
                     encodeURIComponent(this.state.foods[x])
             );
         }
-        queryParams.push("price=" + this.state.totalPrice);
+        queryParams.push("price=" + this.props.totalPrice);
         const queryString = queryParams.join("&");
 
         this.props.history.push({
@@ -136,7 +101,7 @@ class Restaurant extends Component {
                         foodRemoved={this.props.onRemoveFood}
                         disableLess={disabledLessBtn}
                         disableMore={disabledMoreBtn}
-                        price={this.state.totalPrice}
+                        price={this.props.totalPrice}
                         purchasable={this.state.purchasable}
                         ordered={this.orderNowHandler}
                     />
@@ -148,7 +113,7 @@ class Restaurant extends Component {
                     foodOrder={this.props.foo}
                     orderContinueing={this.orderNowContinueHandler}
                     orderCancelling={this.orderNowCancelHandler}
-                    price={this.state.totalPrice}
+                    price={this.props.totalPrice}
                 />
             );
         }
@@ -173,7 +138,8 @@ class Restaurant extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        foo: state.foodReducer.foods
+        foo: state.foodReducer.foods,
+        totalPrice: state.foodReducer.totalPrice
     };
 };
 
