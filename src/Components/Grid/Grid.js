@@ -22,12 +22,13 @@ const Grid = (props) => {
                 <RightColumn>
                     <Slider />
                     <Routes>
-                        <Route path="/" exact element={<Restaurant />} />
-                        <Route path={"lunch"} element={<Lunch />} />
                         <Route
-                            path={props.location.pathname + "dinner"}
-                            element={<Dinner />}
+                            path="/"
+                            exact
+                            element={<Restaurant {...props} />}
                         />
+                        <Route path={"lunch"} element={<Lunch />} />
+                        <Route path={"dinner"} element={<Dinner />} />
                     </Routes>
                 </RightColumn>
             </div>
