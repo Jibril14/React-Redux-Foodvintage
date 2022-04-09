@@ -45,21 +45,8 @@ class Restaurant extends Component {
     };
 
     orderNowContinueHandler = () => {
-        const queryParams = [];
-        for (let x in this.state.foods) {
-            queryParams.push(
-                encodeURIComponent(x) +
-                    "=" +
-                    encodeURIComponent(this.state.foods[x])
-            );
-        }
-        queryParams.push("price=" + this.props.totalPrice);
-        const queryString = queryParams.join("&");
-
-        this.props.history.push({
-            pathname: "/checkout",
-            search: "?" + queryString
-        });
+        console.log("Restaurant props", this.props);
+        this.props.navigate("/checkout");
     };
 
     render() {

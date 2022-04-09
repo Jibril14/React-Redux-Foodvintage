@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import classes from "./ContactInfo.module.css";
 import Button from "../UI/Button/Button";
 import Spinner from "../UI/Spinner/Spinner";
@@ -40,14 +41,13 @@ class ContactInfo extends Component {
                 [deliveryMethod]: e.target.value
             }
         });
-        console.log("CustomerInf", this.state.customerInfo);
     };
 
     orderHandler = (e) => {
         e.preventDefault();
         this.setState({ loading: true });
         const order = {
-            foods: this.props.foods,
+            foods: this.props.foo,
             price: this.props.totalPrice,
             customerInfo: this.state.customerInfo
         };
@@ -126,5 +126,10 @@ class ContactInfo extends Component {
         );
     }
 }
-
-export default ContactInfo;
+const mapStateToProps = (state) => {
+    return {
+        foo: state.foodReducer.foods,
+        totalPrice: state.foodReducer.totalPrice
+    };
+};
+export default connect(mapStateToProps)(ContactInfo);

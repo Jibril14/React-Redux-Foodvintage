@@ -21,8 +21,19 @@ const App = (props) => {
         <Layout>
             <Routes>
                 <Route path="/order" element={<Order />} />
-                <Route path="/checkout" element={<Checkout />} />
                 <Route path="/join-us" element={<Joinus />} />
+                <Route
+                    path="/checkout/*"
+                    element={
+                        <Checkout
+                            location={location}
+                            navigate={navigate}
+                            params={params}
+                            {...props}
+                        />
+                    }
+                />
+
                 <Route
                     exact
                     path="*"
