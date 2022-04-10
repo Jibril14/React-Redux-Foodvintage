@@ -7,7 +7,7 @@ import Modal from "../../Components/UI/Modal/Modal";
 import OrderSummary from "../../Components/Meal/OrderSummary/OrderSummary";
 import Spinner from "../../Components/UI/Spinner/Spinner";
 import axios from "axios";
-import * as actionTypes from "../../store/actions";
+import * as restaurantActions from "../../store/actions/restaurant";
 
 class Restaurant extends Component {
     state = {
@@ -131,11 +131,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddFood: (fName) =>
-            dispatch({ type: actionTypes.ADD_FOOD, foodName: fName }),
+        onAddFood: (fName) => dispatch(restaurantActions.addFood(fName)),
 
-        onRemoveFood: (fName) =>
-            dispatch({ type: actionTypes.REMOVE_FOOD, foodName: fName })
+        onRemoveFood: (fName) => dispatch(restaurantActions.removeFood(fName))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurant);
