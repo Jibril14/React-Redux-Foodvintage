@@ -1,12 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-    foods: {
-        rice: 0,
-        chicken: 0,
-        carrot: 0
-    },
-    totalPrice: 0
+    foods: null,
+    totalPrice: 0,
+    error: null
 };
 
 const FOOD_PRICES = {
@@ -36,6 +33,20 @@ const reducer = (state = initialState, action) => {
                 },
                 totalPrice: state.totalPrice - FOOD_PRICES[action.foodName]
             };
+
+        case actionTypes.SET_FOODS:
+            return {
+                ...state,
+                foods: action.foods, //Food object from server
+                error: null
+            };
+
+        case actionTypes.FETCH_FOODS_ERROR:
+            return {
+                ...state,
+                error: action.err //Error message dispatch
+            };
+
         default:
             return state;
     }

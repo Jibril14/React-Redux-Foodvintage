@@ -6,21 +6,17 @@ import FoodControl from "../../Components/Meal/FoodControl/FoodControl";
 import Modal from "../../Components/UI/Modal/Modal";
 import OrderSummary from "../../Components/Meal/OrderSummary/OrderSummary";
 import Spinner from "../../Components/UI/Spinner/Spinner";
-import axios from "axios";
 import * as restaurantActions from "../../store/actions/restaurant";
+import Error from "../../Components/UI/Error/Error";
 
 class Restaurant extends Component {
     state = {
         orderNow: false,
-        loading: false,
-        error: null
+        loading: false
     };
 
     componentDidMount() {
-        axios.get("/foods.json").then((response) => {
-            this.setState({ foods: response.data });
-        });
-        console.log("this.props.foo", this.props.foo);
+        this.props.onInitFood();
     }
 
     updatePurchasable = (foods) => {
@@ -41,11 +37,9 @@ class Restaurant extends Component {
 
     orderNowCancelHandler = () => {
         this.setState({ orderNow: false });
-        this.setState({ error: null });
     };
 
     orderNowContinueHandler = () => {
-        console.log("Restaurant props", this.props);
         this.props.navigate("/checkout");
     };
 
@@ -72,7 +66,13 @@ class Restaurant extends Component {
             }
         }
 
-        let foods = <Spinner />;
+        let error = this.props.error ? (
+            <Error showErr={true} error={this.props.error} />
+        ) : null;
+        let foods = [<Spinner />, error].map((spinnerError) => {
+            return <div key={Math.random()}>{spinnerError}</div>;
+        });
+
         let orderSummary = null;
 
         if (this.props.foo) {
@@ -125,15 +125,16 @@ class Restaurant extends Component {
 const mapStateToProps = (state) => {
     return {
         foo: state.foodReducer.foods,
-        totalPrice: state.foodReducer.totalPrice
+        totalPrice: state.foodReducer.totalPrice,
+        error: state.foodReducer.error
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddFood: (fName) => dispatch(restaurantActions.addFood(fName)),
-
-        onRemoveFood: (fName) => dispatch(restaurantActions.removeFood(fName))
+        onRemoveFood: (fName) => dispatch(restaurantActions.removeFood(fName)),
+        onInitFood: () => dispatch(restaurantActions.initFoods())
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurant);
