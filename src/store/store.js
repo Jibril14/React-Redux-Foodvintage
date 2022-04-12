@@ -1,11 +1,13 @@
 import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import foodReducer from "./reducers/restaurant";
+import orderReducer from "./reducers/order";
 
 export const store = configureStore(
     {
         reducer: {
-            foodReducer
+            restaurantFood: foodReducer,
+            restaurantOrder: orderReducer
         }
     },
     applyMiddleware(thunk)

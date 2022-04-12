@@ -124,9 +124,9 @@ class Restaurant extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        foo: state.foodReducer.foods,
-        totalPrice: state.foodReducer.totalPrice,
-        error: state.foodReducer.error
+        foo: state.restaurantFood.foods,
+        totalPrice: state.restaurantFood.totalPrice,
+        error: state.restaurantFood.error
     };
 };
 

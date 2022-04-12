@@ -3,17 +3,12 @@ import { connect } from "react-redux";
 import classes from "./ContactInfo.module.css";
 import Button from "../UI/Button/Button";
 import Spinner from "../UI/Spinner/Spinner";
-import axios from "axios";
 import Error from "../UI/Error/Error";
 import Success from "../UI/Success/Success";
+import * as orderActions from "../../store/actions/order";
 
 class ContactInfo extends Component {
     state = {
-        loading: false,
-        error: null,
-        success: false,
-        orders: [],
-
         customerInfo: {
             name: "",
             email: "",
@@ -45,31 +40,18 @@ class ContactInfo extends Component {
 
     orderHandler = (e) => {
         e.preventDefault();
-        this.setState({ loading: true });
         const order = {
             foods: this.props.foo,
             price: this.props.totalPrice,
             customerInfo: this.state.customerInfo
         };
-
-        axios
-            .post("/orders.json", order)
-            .then((response) => {
-                console.log(response);
-                this.setState({ loading: false });
-                this.setState({ error: null });
-                this.setState({ success: true });
-
-                setTimeout(() => this.props.history.push("/"), 3000);
-            })
-            .catch((error) => {
-                this.setState({ error: error.message });
-                this.setState({ loading: false });
-            });
+        this.props.onOrderFood(order);
     };
 
     render() {
         let form = (
+            <React.Fragment>
+            <h4 id="h4">Enter Your Contact Data</h4>
             <form onChange={this.formHandler}>
                 <input
                     type="text"
@@ -110,26 +92,37 @@ class ContactInfo extends Component {
                     <option value="express">Express Delivery</option>
                     <option value="dhy">Dhl</option>
                 </select>
-                <Button clicked={this.orderHandler}>Order Now</Button>
+                <Button type="submit" clicked={this.orderHandler}>Order Now</Button>
             </form>
+             </React.Fragment>
         );
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = <Spinner />;
         }
         return (
             <div className={classes.ContactInfo}>
-                <h4 id="h4">Enter Your Contact Data</h4>
+                
                 {form}
-                <Success showErr={this.state.success} />
-                <Error showErr={this.state.error} error={this.state.error} />
+                <Success showErr={this.props.success} />
+                <Error showErr={this.props.error} error={this.props.error} />
             </div>
         );
     }
 }
 const mapStateToProps = (state) => {
     return {
-        foo: state.foodReducer.foods,
-        totalPrice: state.foodReducer.totalPrice
+        foo: state.restaurantFood.foods,
+        totalPrice: state.restaurantFood.totalPrice,
+        loading: state.restaurantOrder.loading,
+        error: state.restaurantOrder.error,
+        success: state.restaurantOrder.success
     };
 };
-export default connect(mapStateToProps)(ContactInfo);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onOrderFood: (orderData) =>
+            dispatch(orderActions.purchaseFood(orderData))
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ContactInfo);

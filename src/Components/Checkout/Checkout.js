@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import classes from "./Checkout.module.css";
 import Meal from "../Meal/Meal";
@@ -16,8 +16,10 @@ class Checkout extends Component {
         console.log(this.props.location.pathname + "/contact-data");
     };
     render() {
-        return (
-            <div className={classes.Contact}>
+        let orderSummary = <Navigate to="/" />;
+
+        if (this.props.foo) {
+            orderSummary = (
                 <div>
                     <h1>Do have a wonderful meal!</h1>
                     <div
@@ -48,14 +50,15 @@ class Checkout extends Component {
                         {/* Route auto match the base component url*/}
                     </Routes>
                 </div>
-            </div>
-        );
+            );
+        }
+        return <div className={classes.Contact}>{orderSummary}</div>;
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        foo: state.foodReducer.foods
+        foo: state.restaurantFood.foods
     };
 };
 export default connect(mapStateToProps)(Checkout);
