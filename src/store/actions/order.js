@@ -22,7 +22,7 @@ export const purchasingFoodStart = () => {
     };
 };
 
-export const purchaseFood = (orderData) => {
+export const purchaseFood = (orderData, homepage) => {
     return (dispatch) => {
         dispatch(purchasingFoodStart());
         axios
@@ -30,18 +30,10 @@ export const purchaseFood = (orderData) => {
             .then((response) => {
                 console.log(response);
                 dispatch(purchaseFoodSuccess(response.data.name, orderData));
-                /*
-            this.setState({ loading: false });
-            this.setState({ error: null });
-            this.setState({ success: true });
-
-            setTimeout(() => this.props.history.push("/"), 3000);
-        */
+                setTimeout(() => homepage("/"), 3000);
             })
             .catch((error) => {
                 dispatch(purchaseFoodFail("Network Wahala!"));
-
-                //this.setState({ loading: false });
             });
     };
 };

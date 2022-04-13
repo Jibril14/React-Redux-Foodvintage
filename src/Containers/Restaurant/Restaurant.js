@@ -7,6 +7,7 @@ import Modal from "../../Components/UI/Modal/Modal";
 import OrderSummary from "../../Components/Meal/OrderSummary/OrderSummary";
 import Spinner from "../../Components/UI/Spinner/Spinner";
 import * as restaurantActions from "../../store/actions/restaurant";
+import * as actionTypes from "../../store/actions/actionTypes";
 import Error from "../../Components/UI/Error/Error";
 
 class Restaurant extends Component {
@@ -17,6 +18,7 @@ class Restaurant extends Component {
 
     componentDidMount() {
         this.props.onInitFood();
+        this.props.succesMessage();
     }
 
     updatePurchasable = (foods) => {
@@ -134,7 +136,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onAddFood: (fName) => dispatch(restaurantActions.addFood(fName)),
         onRemoveFood: (fName) => dispatch(restaurantActions.removeFood(fName)),
-        onInitFood: () => dispatch(restaurantActions.initFoods())
+        onInitFood: () => dispatch(restaurantActions.initFoods()),
+        succesMessage: () =>
+            dispatch({
+                type: actionTypes.PURCHASE_SUCCESS_MESSAGE,
+                success: false
+            })
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurant);

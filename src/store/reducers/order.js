@@ -29,6 +29,12 @@ const reducer = (state = initialState, action) => {
                 error: null
             };
 
+        case actionTypes.PURCHASE_SUCCESS_MESSAGE:
+            return {
+                ...state,
+                success: action.success
+            };
+
         case actionTypes.PURCHASE_FOOD_FAIL:
             return {
                 ...state,

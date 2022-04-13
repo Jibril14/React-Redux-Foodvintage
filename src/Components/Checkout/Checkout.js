@@ -46,7 +46,10 @@ class Checkout extends Component {
                         </div>
                     </div>
                     <Routes>
-                        <Route path="contact-data" element={<ContactInfo />} />
+                        <Route
+                            path="contact-data"
+                            element={<ContactInfo {...this.props} />}
+                        />
                         {/* Route auto match the base component url*/}
                     </Routes>
                 </div>

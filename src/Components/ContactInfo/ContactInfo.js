@@ -5,6 +5,7 @@ import Button from "../UI/Button/Button";
 import Spinner from "../UI/Spinner/Spinner";
 import Error from "../UI/Error/Error";
 import Success from "../UI/Success/Success";
+
 import * as orderActions from "../../store/actions/order";
 
 class ContactInfo extends Component {
@@ -45,63 +46,66 @@ class ContactInfo extends Component {
             price: this.props.totalPrice,
             customerInfo: this.state.customerInfo
         };
-        this.props.onOrderFood(order);
+
+        const homepage = this.props.navigate;
+        this.props.onOrderFood(order, homepage);
     };
 
     render() {
         let form = (
             <React.Fragment>
-            <h4 id="h4">Enter Your Contact Data</h4>
-            <form onChange={this.formHandler}>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    className={classes.input}
-                    required
-                ></input>
-                <input
-                    className={classes.input}
-                    type="text"
-                    name="email"
-                    placeholder="Email"
-                    required
-                ></input>
-                <input
-                    className={classes.input}
-                    type="text"
-                    name="address"
-                    placeholder="Address"
-                    required
-                ></input>
-                <input
-                    className={classes.input}
-                    type="text"
-                    name="postal"
-                    placeholder="Postal Code"
-                    maxlength="6"
-                    required
-                ></input>
+                <h4 id="h4">Enter Your Contact Data</h4>
+                <form onChange={this.formHandler}>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        className={classes.input}
+                        required
+                    ></input>
+                    <input
+                        className={classes.input}
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        required
+                    ></input>
+                    <input
+                        className={classes.input}
+                        type="text"
+                        name="address"
+                        placeholder="Address"
+                        required
+                    ></input>
+                    <input
+                        className={classes.input}
+                        type="text"
+                        name="postal"
+                        placeholder="Postal Code"
+                        maxlength="6"
+                        required
+                    ></input>
 
-                <select
-                    id="delivery"
-                    name="Delivery method"
-                    placeholder="Delivery method"
-                    style={{ width: "100%" }}
-                >
-                    <option value="express">Express Delivery</option>
-                    <option value="dhy">Dhl</option>
-                </select>
-                <Button type="submit" clicked={this.orderHandler}>Order Now</Button>
-            </form>
-             </React.Fragment>
+                    <select
+                        id="delivery"
+                        name="Delivery method"
+                        placeholder="Delivery method"
+                        style={{ width: "100%" }}
+                    >
+                        <option value="express">Express Delivery</option>
+                        <option value="dhy">Dhl</option>
+                    </select>
+                    <Button type="submit" clicked={this.orderHandler}>
+                        Order Now
+                    </Button>
+                </form>
+            </React.Fragment>
         );
         if (this.props.loading) {
             form = <Spinner />;
         }
         return (
             <div className={classes.ContactInfo}>
-                
                 {form}
                 <Success showErr={this.props.success} />
                 <Error showErr={this.props.error} error={this.props.error} />
@@ -121,8 +125,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onOrderFood: (orderData) =>
-            dispatch(orderActions.purchaseFood(orderData))
+        onOrderFood: (orderData, homepage) =>
+            dispatch(orderActions.purchaseFood(orderData, homepage))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ContactInfo);

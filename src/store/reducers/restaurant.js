@@ -38,6 +38,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 foods: action.foods, //Food object from server
+                totalPrice: 0,
                 error: null
             };
 
