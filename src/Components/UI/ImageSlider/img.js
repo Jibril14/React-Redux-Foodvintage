@@ -7,11 +7,8 @@ import "./Slider.css";
 
 const len = SliderImage.length - 1;
 
-console.log("lenslider", SliderImage.length);
-console.log("lens", len);
 function Slider() {
     const [activeIndex, setActiveIndex] = useState(0);
-    console.log("activeind", activeIndex);
 
     return (
         <div className="slider-container">
