@@ -1,45 +1,39 @@
 import React, { Component } from "react";
 import SingleOrder from "./SingleOrder/SingleOrder";
-import axios from "axios";
+import { connect } from "react-redux";
+import * as orderActions from "../../store/actions/order";
+import Spinner from "../UI/Spinner/Spinner";
 
 class Order extends Component {
-    state = {
-        orders: [],
-        loading: true,
-        error: false
-    };
     componentDidMount() {
-        axios
-            .get("./orders.json")
-            .then((response) => {
-                const fetchFoods = [];
-                for (let key in response.data) {
-                    fetchFoods.push({
-                        ...response.data[key],
-                        id: key
-                    });
-                }
-                this.setState({ loading: false, orders: fetchFoods });
-            })
-            .catch((err) => {
-                this.setState({ loading: false });
-                alert(err);
-            });
+        this.props.onFetchOrder();
     }
 
     render() {
-        return (
-            <div>
-                {this.state.orders.map((order) => (
-                    <SingleOrder
-                        key={order.id}
-                        foods={order.foods}
-                        price={+order.price}
-                    />
-                ))}
-            </div>
-        );
+        let orders = <Spinner />;
+        if (!this.props.loading) {
+            orders = this.props.orders.map((order) => (
+                <SingleOrder
+                    key={order.id}
+                    foods={order.foods}
+                    price={+order.price}
+                />
+            ));
+        }
+        return <div>{orders}</div>;
     }
 }
 
-export default Order;
+const mapStateToProps = (state) => {
+    return {
+        orders: state.restaurantOrder.orders,
+        loading: state.restaurantOrder.loading
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onFetchOrder: () => dispatch(orderActions.fetchOrderInit())
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Order);

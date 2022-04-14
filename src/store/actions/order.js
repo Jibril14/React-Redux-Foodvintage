@@ -28,12 +28,52 @@ export const purchaseFood = (orderData, homepage) => {
         axios
             .post("/orders.json", orderData)
             .then((response) => {
-                console.log(response);
                 dispatch(purchaseFoodSuccess(response.data.name, orderData));
                 setTimeout(() => homepage("/"), 3000);
             })
             .catch((error) => {
                 dispatch(purchaseFoodFail("Network Wahala!"));
+            });
+    };
+};
+
+export const fetchOrderSuccess = (orders) => {
+    return {
+        type: actionTypes.FETCH_ORDER_SUCCESS,
+        orders: orders
+    };
+};
+
+export const fetchOrderFail = (error) => {
+    return {
+        type: actionTypes.FETCH_ORDER_FAIL,
+        error: error
+    };
+};
+
+export const fetchOrderStart = () => {
+    return {
+        type: actionTypes.FETCH_ORDER_START
+    };
+};
+
+export const fetchOrderInit = () => {
+    return (dispatch) => {
+        dispatch(fetchOrderStart());
+        axios
+            .get("./orders.json")
+            .then((response) => {
+                const fetchFoods = [];
+                for (let key in response.data) {
+                    fetchFoods.push({
+                        ...response.data[key],
+                        id: key
+                    });
+                }
+                dispatch(fetchOrderSuccess(fetchFoods));
+            })
+            .catch((err) => {
+                dispatch(fetchOrderFail(alert(err)));
             });
     };
 };
