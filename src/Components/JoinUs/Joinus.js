@@ -100,8 +100,12 @@ class Joinus extends Component {
         }
         return (
             <div className={classes.container}>
-                <h4 style={{ color: "#000", margin: "10px 0" }}>
-                    We connect food lovers with food businesses
+                <h4 style={{ color: "cyan", margin: "10px 0" }}>
+                    We connect food lovers with food businesses{" "}
+                    <i
+                        className="fa fa-thumbs-up"
+                        style={{ color: "red", fontSize: "26px" }}
+                    ></i>
                 </h4>
                 {spinner}
                 {form}

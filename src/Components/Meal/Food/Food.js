@@ -12,28 +12,30 @@ const restaurantFoods = (props) => {
         case "rice0":
             food = (
                 <div className={classes.rice0}>
-                    {/* <img
-                        src={require("../../../Assets/rice1.png").default}
-                        alt="Foodvintage" />
-                        or
-                        <img src="../../../../Assets/rice2.png" alt="Foodvintage" />
-                  */}
-
-                    <img src="../../../../Assets/rice0.png" alt="Foodvintage" />
+                    <img
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030660/FoodApp/Ingredients/rice0_nhrfex.png"
+                        alt=" "
+                    />
                 </div>
             );
             break;
         case "rice1":
             food = (
                 <div className={classes.rice1}>
-                    <img src="../../../../Assets/rice1.png" alt="Foodvintage" />
+                    <img
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030660/FoodApp/Ingredients/rice1_cgbv9r.png"
+                        alt=" "
+                    />
                 </div>
             );
             break;
         case "rice2":
             food = (
                 <div className={classes.rice2}>
-                    <img src="../../../../Assets/rice2.png" alt="Foodvintage" />
+                    <img
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030660/FoodApp/Ingredients/rice333_f5eoh0.png"
+                        alt=" "
+                    />
                 </div>
             );
             break;
@@ -42,8 +44,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.chicken0}>
                     <img
-                        src="../../../../Assets/chicken0.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030659/FoodApp/Ingredients/chicken0_qrtwzr.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -52,8 +54,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.chicken1}>
                     <img
-                        src="../../../../Assets/chicken1.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030660/FoodApp/Ingredients/chicken1_mk4h6b.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -62,8 +64,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.chicken2}>
                     <img
-                        src="../../../../Assets/chicken2.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030659/FoodApp/Ingredients/chicken2_jmeqsu.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -72,8 +74,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.chicken3}>
                     <img
-                        src="../../../../Assets/chicken3.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030660/FoodApp/Ingredients/chicken3_ksprg5.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -82,8 +84,19 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.chicken4}>
                     <img
-                        src="../../../../Assets/chicken4.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030658/FoodApp/Ingredients/chicken4_ftkn9k.png"
+                        alt=" "
+                    />
+                </div>
+            );
+            break;
+
+        case "carrot0":
+            food = (
+                <div className={classes.carrot0}>
+                    <img
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030659/FoodApp/Ingredients/carrot0_xx3ecm.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -93,8 +106,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot1}>
                     <img
-                        src="../../../../Assets/carrot1.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030660/FoodApp/Ingredients/carrot1_hb97op.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -103,8 +116,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot2}>
                     <img
-                        src="../../../../Assets/carrot2.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030660/FoodApp/Ingredients/carrot2_azf3fz.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -113,8 +126,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot3}>
                     <img
-                        src="../../../../Assets/carrot3.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030658/FoodApp/Ingredients/carrot3_oqhoaa.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -123,8 +136,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot4}>
                     <img
-                        src="../../../../Assets/carrot4.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030658/FoodApp/Ingredients/carrot4_c7mshn.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -133,8 +146,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot5}>
                     <img
-                        src="../../../../Assets/carrot5.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030660/FoodApp/Ingredients/carrot5_rjmljs.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -143,8 +156,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot6}>
                     <img
-                        src="../../../../Assets/carrot6.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030658/FoodApp/Ingredients/carrot6_j7nlsc.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -153,8 +166,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot7}>
                     <img
-                        src="../../../../Assets/carrot7.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030659/FoodApp/Ingredients/carrot7_jy53j4.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -163,8 +176,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot8}>
                     <img
-                        src="../../../../Assets/carrot8.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030659/FoodApp/Ingredients/carrot8_v1r3lz.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -173,8 +186,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot9}>
                     <img
-                        src="../../../../Assets/carrot9.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030659/FoodApp/Ingredients/carrot9_bfzjfv.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -183,8 +196,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot10}>
                     <img
-                        src="../../../../Assets/carrot10.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030658/FoodApp/Ingredients/carrot10_z36zde.png"
+                        alt=" "
                     />
                 </div>
             );
@@ -193,8 +206,8 @@ const restaurantFoods = (props) => {
             food = (
                 <div className={classes.carrot11}>
                     <img
-                        src="../../../../Assets/carrot11.png"
-                        alt="Foodvintage"
+                        src="https://res.cloudinary.com/webmonc/image/upload/v1665030659/FoodApp/Ingredients/carrot9_bfzjfv.png"
+                        alt=" "
                     />
                 </div>
             );
